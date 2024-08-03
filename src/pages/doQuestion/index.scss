@@ -1,7 +1,4 @@
-.indexPage {
-    background: #A2C7D7;
-    height: 100vh;
-    //padding-top: 30%;
+.doQuestionPage {
 
     .title {
         color: #ffffff;
@@ -9,9 +6,12 @@
         text-align: center;
     }
 
-    .subTitle {
-        color: white;
+    .options-wrapper {
         margin-bottom: 48px;
+    }
+
+    .controlBtn {
+        margin: 24px 48px;
     }
 
     .enterBtn {
@@ -19,9 +19,5 @@
         background: #806497;
         border-radius: 30px;
         border: none;
-    }
-    image{
-        width: 65vh;
-        height: 80vh;
     }
 }
