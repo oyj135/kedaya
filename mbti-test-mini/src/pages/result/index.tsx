@@ -3,14 +3,26 @@ import { AtButton } from "taro-ui";
 import Taro from "@tarojs/taro";
 import headerBg from "../../assets/headerBg.jpg";
 import GlobalFooter from "../../components/GlobalFooter";
+import questions from "../../data/questions.json";
 import questionResults from "../../data/question_results.json";
 import "./index.scss";
+import { getBestQuestionResult } from "../utils/bizUtils";
 
 /**
  * 测试结果页面
  */
 export default () => {
-  const result = questionResults[0];
+  //获取答案
+  const answerList = Taro.getStorageSync("answerList");
+  if (!answerList || answerList.length < 1) {
+    Taro.showToast({
+      title: "答案为空",
+      icon: "error",
+      duration: 3000,
+    });
+  }
+  //获取测试结果
+  const result = getBestQuestionResult(answerList, questions, questionResults);
   return (
     <View className="resultPage">
       <View className="at-article__h1 title">{result.resultName}</View>
@@ -20,7 +32,7 @@ export default () => {
         circle
         className="enterBtn"
         onClick={() => {
-          Taro.navigateTo({
+          Taro.reLaunch({
             url: "/pages/index/index",
           });
         }}>
