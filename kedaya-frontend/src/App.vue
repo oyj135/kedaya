@@ -1,4 +1,7 @@
 <template>
+  <a-badge :count="9">
+    <a-avatar shape="square" />
+  </a-badge>
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
