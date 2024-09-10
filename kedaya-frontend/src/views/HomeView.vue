@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 const a = 1;
 </script>
 
