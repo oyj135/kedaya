@@ -1,5 +1,5 @@
 <template>
-  <div class="basicLayout">
+  <div id="basicLayout">
     <a-layout style="height: 100vh">
       <a-layout-header class="header">
         <GlobalHeader />

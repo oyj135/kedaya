@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import UserLayout from "@/layouts/UserLayout.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -14,6 +15,23 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       hideInMenu: true,
     },
+  },
+  {
+    path: "/user",
+    name: "用户",
+    component: UserLayout,
+    children: [
+      {
+        path: "/user/login",
+        name: "用户登录",
+        component: HomeView,
+      },
+      {
+        path: "/user/register",
+        name: "用户注册",
+        component: HomeView,
+      },
+    ],
   },
   {
     path: "/about",
