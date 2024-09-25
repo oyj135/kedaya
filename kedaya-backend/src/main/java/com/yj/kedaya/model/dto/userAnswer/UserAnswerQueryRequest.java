@@ -1,13 +1,10 @@
 package com.yj.kedaya.model.dto.userAnswer;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.yj.kedaya.common.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 查询用户答案请求
@@ -76,6 +73,11 @@ public class UserAnswerQueryRequest extends PageRequest implements Serializable 
      * id
      */
     private Long notId;
+
+    /**
+     * 搜索词
+     */
+    private String searchText;
 
     private static final long serialVersionUID = 1L;
 }
