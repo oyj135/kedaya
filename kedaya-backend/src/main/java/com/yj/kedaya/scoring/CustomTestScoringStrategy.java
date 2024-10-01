@@ -23,6 +23,8 @@ import java.util.Map;
  * @Package com.yj.kedaya.scoring
  * @Date 2024/9/27 13:05
  */
+@ScoringStrategyConfig(appType = 1, scoringStrategy = 0)
+
 public class CustomTestScoringStrategy implements ScoringStrategy {
 
     @Resource
