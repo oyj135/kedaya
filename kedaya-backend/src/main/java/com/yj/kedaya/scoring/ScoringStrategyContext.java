@@ -6,6 +6,7 @@ import com.yj.kedaya.model.entity.App;
 import com.yj.kedaya.model.entity.UserAnswer;
 import com.yj.kedaya.model.enums.AppScoringStrategyEnum;
 import com.yj.kedaya.model.enums.AppTypeEnum;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,6 +19,9 @@ import java.util.List;
  * @Package com.yj.kedaya.scoring
  * @Date 2024/10/1 12:50
  */
+
+@Service
+@Deprecated
 public class ScoringStrategyContext {
     @Resource
     private CustomScoreScoringStrategy customScoreScoringStrategy;
