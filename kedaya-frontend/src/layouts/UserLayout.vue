@@ -11,7 +11,7 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="https://www.ouyangjiang.com" target="_blank">
+        <a href="https://www.ouyangjian.com" target="_blank">
           My Blog 听海说浪---by YJ
         </a>
       </a-layout-footer>
@@ -29,8 +29,8 @@
 }
 
 #userLayout .logo {
-  height: 48px;
   width: 48px;
+  height: 48px;
 }
 
 #userLayout .header {

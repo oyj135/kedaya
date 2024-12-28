@@ -8,7 +8,7 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="https://www.ouyangjiang.com" target="_blank">
+        <a href="https://www.ouyangjian.com" target="_blank">
           My Blog 听海说浪---by YJ
         </a>
       </a-layout-footer>
@@ -27,13 +27,13 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
 }
 
 #basicLayout .content {
-  background: linear-gradient(to right, #fefefe, #fff);
   margin-bottom: 28px;
   padding: 20px;
+  background: linear-gradient(to right, #fefefe, #fff);
 }
 
 .footer {
-  text-align: center;
   padding: 16px;
+  text-align: center;
 }
 </style>
