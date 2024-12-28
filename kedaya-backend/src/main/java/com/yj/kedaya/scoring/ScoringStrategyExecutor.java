@@ -4,6 +4,7 @@ import com.yj.kedaya.common.ErrorCode;
 import com.yj.kedaya.exception.BusinessException;
 import com.yj.kedaya.model.entity.App;
 import com.yj.kedaya.model.entity.UserAnswer;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * @Package com.yj.kedaya.scoring
  * @Date 2024/12/27 22:19
  */
+@Service
 public class ScoringStrategyExecutor {
 
     //策略列表
