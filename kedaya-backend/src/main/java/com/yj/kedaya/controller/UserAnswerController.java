@@ -17,6 +17,7 @@ import com.yj.kedaya.model.dto.userAnswer.UserAnswerUpdateRequest;
 import com.yj.kedaya.model.entity.App;
 import com.yj.kedaya.model.entity.UserAnswer;
 import com.yj.kedaya.model.entity.User;
+import com.yj.kedaya.model.enums.ReviewStatusEnum;
 import com.yj.kedaya.model.vo.UserAnswerVO;
 import com.yj.kedaya.scoring.ScoringStrategyExecutor;
 import com.yj.kedaya.service.AppService;
@@ -74,6 +75,9 @@ public class UserAnswerController {
         long appId = userAnswerAddRequest.getAppId();
         App app = appService.getById(appId);
         ThrowUtils.throwIf(app == null, ErrorCode.NOT_FOUND_ERROR);
+        if(!ReviewStatusEnum.PASS.equals(ReviewStatusEnum.getEnumByValue(app.getReviewStatus()))){
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "应用未过审核，无法答题");
+        }
         // 填充默认值
         User loginUser = userService.getLoginUser(request);
         userAnswer.setUserId(loginUser.getId());
