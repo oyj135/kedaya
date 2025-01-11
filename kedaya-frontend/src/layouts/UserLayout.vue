@@ -1,31 +1,35 @@
 <template>
   <div id="userLayout">
-    <a-layout style="min-height: 100vh">
+    <a-layout style="height: 100vh">
       <a-layout-header class="header">
         <a-space>
           <img class="logo" src="../assets/logo.png" />
-          <div>可达鸭 AI 答题应用平台</div>
+          <div>智慧答 AI 答题应用平台</div>
         </a-space>
       </a-layout-header>
       <a-layout-content class="content">
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="https://www.ouyangjian.com" target="_blank">
-          My Blog 听海说浪---by YJ
-        </a>
+        <a
+          href="https://github.com/lenyanjgk"
+          style="text-decoration: none"
+          target="_blank"
+          >Lenyanjgk</a
+        >
+        &copy; zhihuida. All rights reserved.
       </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup></script>
 
 <style scoped>
 #userLayout {
   text-align: center;
-  background: url("https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png")
-    0% 0% / 100% 100%;
+  background: url("../assets/bg.png");
+  background-size: cover;
 }
 
 #userLayout .logo {
@@ -34,7 +38,7 @@
 }
 
 #userLayout .header {
-  margin-bottom: 16px;
+  margin-top: 16px;
   font-size: 21px;
 }
 
@@ -43,12 +47,9 @@
   padding: 20px;
 }
 
-#userLayout .footer {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
+.footer {
   padding: 16px;
   text-align: center;
+  background: #efefef;
 }
 </style>

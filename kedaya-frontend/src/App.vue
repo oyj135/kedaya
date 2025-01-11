@@ -9,11 +9,21 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import BasicLayout from "@/layouts/BasicLayout.vue";
 import { useRoute } from "vue-router";
+import { getLoginUserUsingGet } from "@/api/userController";
 
 const route = useRoute();
+
+getLoginUserUsingGet().then((res) => {
+  if (res && res.data) {
+    console.log(res.data);
+  }
+});
 </script>
 
-<style></style>
+<style>
+#app {
+}
+</style>

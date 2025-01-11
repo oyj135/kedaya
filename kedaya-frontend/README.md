@@ -1,4 +1,4 @@
-# kedaya-frontend
+# lendada-frontend
 
 ## Project setup
 ```
