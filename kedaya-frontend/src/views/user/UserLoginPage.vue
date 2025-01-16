@@ -51,12 +51,6 @@
               <icon-qq />
             </a-button>
             <a-button shape="circle" type="outline">
-              <icon-wechat />
-            </a-button>
-            <a-button shape="circle" type="outline">
-              <icon-lark-color />
-            </a-button>
-            <a-button shape="circle" type="outline">
               <icon-github />
             </a-button>
           </div>
