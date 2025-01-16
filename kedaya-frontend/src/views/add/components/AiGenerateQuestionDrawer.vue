@@ -79,7 +79,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const form = reactive({
-  optionNumber: 2,
+  optionNumber: 4,
   questionNumber: 10,
 } as API.AiGenerateQuestionRequest);
 
