@@ -27,6 +27,9 @@ public class QuestionContentDTO {
      */
     private List<Option> options;
 
+    /**
+     * 题目选项
+     */
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
