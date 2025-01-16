@@ -1,6 +1,5 @@
 package com.yj.kedaya;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.zhipu.oapi.Constants;
 import com.zhipu.oapi.service.v4.model.ChatCompletionRequest;
 import com.zhipu.oapi.service.v4.model.ChatMessage;
