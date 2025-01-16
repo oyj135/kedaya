@@ -18,6 +18,7 @@
             <a-button size="small" @click="addQuestion(questionContent.length)"
               >底部添加题目
             </a-button>
+            <!-- AI 生成抽屉 -->
             <AiGenerateQuestionDrawer
               :appId="appId"
               :onSSEClose="onSSEClose"
