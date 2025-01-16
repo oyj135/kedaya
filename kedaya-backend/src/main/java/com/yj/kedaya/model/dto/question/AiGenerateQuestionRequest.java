@@ -2,30 +2,29 @@ package com.yj.kedaya.model.dto.question;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * AI 生成题目请求
- * @Author 阳健
- * @Package com.yj.kedaya.model.dto.question
- * @Date 2025/1/16 20:44
+ *
  */
-
 @Data
-public class AiGenerateQuestionRequest {
+public class AiGenerateQuestionRequest implements Serializable {
 
     /**
-     * 应用id
+     * 应用 id
      */
     private Long appId;
 
     /**
-     * 题目数量
+     * 题目数
      */
     int questionNumber = 10;
 
     /**
-     * 选项数量
+     * 选项数
      */
-    int optionNumber = 4;
+    int optionNumber = 2;
 
-    private  static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 }

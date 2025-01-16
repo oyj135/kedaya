@@ -8,19 +8,19 @@
     <a-form-item field="appName" label="应用名称">
       <a-input
         v-model="formSearchParams.appName"
-        allow-clear
         placeholder="请输入应用名称"
+        allow-clear
       />
     </a-form-item>
     <a-form-item field="appDesc" label="应用描述">
       <a-input
         v-model="formSearchParams.appDesc"
-        allow-clear
         placeholder="请输入应用描述"
+        allow-clear
       />
     </a-form-item>
     <a-form-item>
-      <a-button html-type="submit" style="width: 100px" type="primary">
+      <a-button type="primary" html-type="submit" style="width: 100px">
         搜索
       </a-button>
     </a-form-item>
@@ -34,12 +34,10 @@
       current: searchParams.current,
       total,
     }"
-    :scroll="scrollPercent"
-    :scrollbar="scrollbar"
     @page-change="onPageChange"
   >
     <template #appIcon="{ record }">
-      <a-image :src="record.appIcon" width="64" />
+      <a-image width="64" :src="record.appIcon" />
     </template>
     <template #appType="{ record }">
       {{ APP_TYPE_MAP[record.appType] }}
@@ -51,13 +49,16 @@
       {{ REVIEW_STATUS_MAP[record.reviewStatus] }}
     </template>
     <template #reviewTime="{ record }">
-      {{ record.reviewTime && dayjs(record.reviewTime).format("YYYY-MM-DD") }}
+      {{
+        record.reviewTime &&
+        dayjs(record.reviewTime).format("YYYY-MM-DD HH:mm:ss")
+      }}
     </template>
     <template #createTime="{ record }">
-      {{ dayjs(record.createTime).format("YYYY-MM-DD") }}
+      {{ dayjs(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
     </template>
     <template #updateTime="{ record }">
-      {{ dayjs(record.updateTime).format("YYYY-MM-DD") }}
+      {{ dayjs(record.updateTime).format("YYYY-MM-DD HH:mm:ss") }}
     </template>
     <template #optional="{ record }">
       <a-space>
@@ -81,7 +82,7 @@
   </a-table>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, watchEffect } from "vue";
 import {
   deleteAppUsingPost,
@@ -104,8 +105,6 @@ const formSearchParams = ref<API.AppQueryRequest>({});
 const initSearchParams = {
   current: 1,
   pageSize: 10,
-  sortOrder: "descend",
-  sortField: "createTime",
 };
 
 const searchParams = ref<API.AppQueryRequest>({
@@ -265,13 +264,6 @@ const columns = [
   {
     title: "操作",
     slotName: "optional",
-    width: 160,
-    fixed: "right",
   },
 ];
-const scrollbar = ref(true);
-const scrollPercent = {
-  x: "130%",
-  y: "100%",
-};
 </script>

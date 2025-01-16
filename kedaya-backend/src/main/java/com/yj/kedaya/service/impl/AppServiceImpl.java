@@ -26,7 +26,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -44,12 +46,12 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
      * 校验数据
      *
      * @param app
-     * @param add      对创建的数据进行校验
+     * @param add 对创建的数据进行校验
      */
     @Override
     public void validApp(App app, boolean add) {
         ThrowUtils.throwIf(app == null, ErrorCode.PARAMS_ERROR);
-        //  从对象中取值
+        // 从对象中取值
         String appName = app.getAppName();
         String appDesc = app.getAppDesc();
         Integer appType = app.getAppType();
@@ -58,25 +60,23 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
 
         // 创建数据时，参数不能为空
         if (add) {
-            //  补充校验规则
-            ThrowUtils.throwIf(StringUtils.isBlank(appName), ErrorCode.PARAMS_ERROR, "应用名不能为空");
+            // 补充校验规则
+            ThrowUtils.throwIf(StringUtils.isBlank(appName), ErrorCode.PARAMS_ERROR, "应用名称不能为空");
             ThrowUtils.throwIf(StringUtils.isBlank(appDesc), ErrorCode.PARAMS_ERROR, "应用描述不能为空");
             AppTypeEnum appTypeEnum = AppTypeEnum.getEnumByValue(appType);
-            ThrowUtils.throwIf(appTypeEnum == null, ErrorCode.PARAMS_ERROR, "应用类型非法");
-            AppScoringStrategyEnum appScoringStrategyEnum = AppScoringStrategyEnum.getEnumByValue(scoringStrategy);
-            ThrowUtils.throwIf(appScoringStrategyEnum == null, ErrorCode.PARAMS_ERROR, "应用评分策略非法");
+            ThrowUtils.throwIf(appTypeEnum == null, ErrorCode.PARAMS_ERROR, "应用类别非法");
+            AppScoringStrategyEnum scoringStrategyEnum = AppScoringStrategyEnum.getEnumByValue(scoringStrategy);
+            ThrowUtils.throwIf(scoringStrategyEnum == null, ErrorCode.PARAMS_ERROR, "应用评分策略非法");
         }
         // 修改数据时，有参数则校验
         // 补充校验规则
         if (StringUtils.isNotBlank(appName)) {
-            ThrowUtils.throwIf(appName.length() > 80, ErrorCode.PARAMS_ERROR, "应用名称要小于80");
+            ThrowUtils.throwIf(appName.length() > 80, ErrorCode.PARAMS_ERROR, "应用名称要小于 80");
         }
-        if(reviewStatus != null){
+        if (reviewStatus != null) {
             ReviewStatusEnum reviewStatusEnum = ReviewStatusEnum.getEnumByValue(reviewStatus);
             ThrowUtils.throwIf(reviewStatusEnum == null, ErrorCode.PARAMS_ERROR, "审核状态非法");
         }
-
-
     }
 
     /**
@@ -91,7 +91,7 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
         if (appQueryRequest == null) {
             return queryWrapper;
         }
-        //  从对象中取值
+        // 从对象中取值
         Long id = appQueryRequest.getId();
         String appName = appQueryRequest.getAppName();
         String appDesc = appQueryRequest.getAppDesc();
@@ -107,7 +107,7 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
         String sortField = appQueryRequest.getSortField();
         String sortOrder = appQueryRequest.getSortOrder();
 
-        //  补充需要的查询条件
+        // 补充需要的查询条件
         // 从多字段中搜索
         if (StringUtils.isNotBlank(searchText)) {
             // 需要拼接查询条件
@@ -117,10 +117,9 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
         queryWrapper.like(StringUtils.isNotBlank(appName), "appName", appName);
         queryWrapper.like(StringUtils.isNotBlank(appDesc), "appDesc", appDesc);
         queryWrapper.like(StringUtils.isNotBlank(reviewMessage), "reviewMessage", reviewMessage);
-
         // 精确查询
+        queryWrapper.eq(StringUtils.isNotBlank(appIcon), "appIcon", appIcon);
         queryWrapper.ne(ObjectUtils.isNotEmpty(notId), "id", notId);
-        queryWrapper.ne(ObjectUtils.isNotEmpty(appIcon), "appIcon", appIcon);
         queryWrapper.eq(ObjectUtils.isNotEmpty(id), "id", id);
         queryWrapper.eq(ObjectUtils.isNotEmpty(appType), "appType", appType);
         queryWrapper.eq(ObjectUtils.isNotEmpty(scoringStrategy), "scoringStrategy", scoringStrategy);
@@ -146,7 +145,7 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
         // 对象转封装类
         AppVO appVO = AppVO.objToVo(app);
 
-        //  可以根据需要为封装对象补充值，不需要的内容可以删除
+        // 可以根据需要为封装对象补充值，不需要的内容可以删除
         // region 可选
         // 1. 关联查询用户信息
         Long userId = app.getUserId();
@@ -179,13 +178,12 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
             return AppVO.objToVo(app);
         }).collect(Collectors.toList());
 
-        //  可以根据需要为封装对象补充值，不需要的内容可以删除
+        // 可以根据需要为封装对象补充值，不需要的内容可以删除
         // region 可选
         // 1. 关联查询用户信息
         Set<Long> userIdSet = appList.stream().map(App::getUserId).collect(Collectors.toSet());
         Map<Long, List<User>> userIdUserListMap = userService.listByIds(userIdSet).stream()
                 .collect(Collectors.groupingBy(User::getId));
-
         // 填充信息
         appVOList.forEach(appVO -> {
             Long userId = appVO.getUserId();

@@ -10,8 +10,8 @@ import com.yj.kedaya.exception.ThrowUtils;
 import com.yj.kedaya.mapper.UserAnswerMapper;
 import com.yj.kedaya.model.dto.userAnswer.UserAnswerQueryRequest;
 import com.yj.kedaya.model.entity.App;
-import com.yj.kedaya.model.entity.UserAnswer;
 import com.yj.kedaya.model.entity.User;
+import com.yj.kedaya.model.entity.UserAnswer;
 import com.yj.kedaya.model.vo.UserAnswerVO;
 import com.yj.kedaya.model.vo.UserVO;
 import com.yj.kedaya.service.AppService;
@@ -25,7 +25,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -46,20 +48,20 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
      * 校验数据
      *
      * @param userAnswer
-     * @param add      对创建的数据进行校验
+     * @param add        对创建的数据进行校验
      */
     @Override
     public void validUserAnswer(UserAnswer userAnswer, boolean add) {
         ThrowUtils.throwIf(userAnswer == null, ErrorCode.PARAMS_ERROR);
-        //  从对象中取值
+        // 从对象中取值
         Long appId = userAnswer.getAppId();
         // 创建数据时，参数不能为空
         if (add) {
-            //  补充校验规则
-            ThrowUtils.throwIf(appId == null || appId <= 0, ErrorCode.PARAMS_ERROR,"appId非法");
+            // 补充校验规则
+            ThrowUtils.throwIf(appId == null || appId <= 0, ErrorCode.PARAMS_ERROR, "appId 非法");
         }
         // 修改数据时，有参数则校验
-        //  补充校验规则
+        // 补充校验规则
         if (appId != null) {
             App app = appService.getById(appId);
             ThrowUtils.throwIf(app == null, ErrorCode.PARAMS_ERROR, "应用不存在");
@@ -78,7 +80,7 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
         if (userAnswerQueryRequest == null) {
             return queryWrapper;
         }
-        //  从对象中取值
+        // 从对象中取值
         Long id = userAnswerQueryRequest.getId();
         Long appId = userAnswerQueryRequest.getAppId();
         Integer appType = userAnswerQueryRequest.getAppType();
@@ -95,7 +97,7 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
         String sortField = userAnswerQueryRequest.getSortField();
         String sortOrder = userAnswerQueryRequest.getSortOrder();
 
-        // todo 补充需要的查询条件
+        // 补充需要的查询条件
         // 从多字段中搜索
         if (StringUtils.isNotBlank(searchText)) {
             // 需要拼接查询条件
@@ -134,7 +136,7 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
         // 对象转封装类
         UserAnswerVO userAnswerVO = UserAnswerVO.objToVo(userAnswer);
 
-        //  可以根据需要为封装对象补充值，不需要的内容可以删除
+        // 可以根据需要为封装对象补充值，不需要的内容可以删除
         // region 可选
         // 1. 关联查询用户信息
         Long userId = userAnswer.getUserId();
@@ -168,7 +170,7 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
             return UserAnswerVO.objToVo(userAnswer);
         }).collect(Collectors.toList());
 
-        // todo 可以根据需要为封装对象补充值，不需要的内容可以删除
+        // 可以根据需要为封装对象补充值，不需要的内容可以删除
         // region 可选
         // 1. 关联查询用户信息
         Set<Long> userIdSet = userAnswerList.stream().map(UserAnswer::getUserId).collect(Collectors.toSet());

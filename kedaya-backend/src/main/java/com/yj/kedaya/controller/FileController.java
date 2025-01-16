@@ -2,16 +2,15 @@ package com.yj.kedaya.controller;
 
 import cn.hutool.core.io.FileUtil;
 import com.yj.kedaya.common.BaseResponse;
+import com.yj.kedaya.common.ErrorCode;
+import com.yj.kedaya.common.ResultUtils;
 import com.yj.kedaya.constant.FileConstant;
 import com.yj.kedaya.exception.BusinessException;
 import com.yj.kedaya.manager.CosManager;
-import com.yj.kedaya.service.UserService;
-import com.yj.kedaya.common.ErrorCode;
-import com.yj.kedaya.common.ResultUtils;
 import com.yj.kedaya.model.dto.file.UploadFileRequest;
 import com.yj.kedaya.model.entity.User;
 import com.yj.kedaya.model.enums.FileUploadBizEnum;
-
+import com.yj.kedaya.service.UserService;
 import java.io.File;
 import java.util.Arrays;
 import javax.annotation.Resource;
@@ -49,7 +48,7 @@ public class FileController {
      */
     @PostMapping("/upload")
     public BaseResponse<String> uploadFile(@RequestPart("file") MultipartFile multipartFile,
-                                           UploadFileRequest uploadFileRequest, HttpServletRequest request) {
+            UploadFileRequest uploadFileRequest, HttpServletRequest request) {
         String biz = uploadFileRequest.getBiz();
         FileUploadBizEnum fileUploadBizEnum = FileUploadBizEnum.getEnumByValue(biz);
         if (fileUploadBizEnum == null) {

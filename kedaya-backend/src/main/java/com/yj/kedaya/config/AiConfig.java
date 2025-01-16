@@ -6,13 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
-/**
- *
- * @Author 阳健
- * @Package com.yj.kedaya.manager
- * @Date 2025/1/16 17:31
- */
 @Configuration
 @ConfigurationProperties(prefix = "ai")
 @Data

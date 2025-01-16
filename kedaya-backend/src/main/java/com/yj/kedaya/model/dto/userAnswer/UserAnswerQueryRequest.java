@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class UserAnswerQueryRequest extends PageRequest implements Serializable {
 
     /**
-     * id
+     *
      */
     private Long id;
 

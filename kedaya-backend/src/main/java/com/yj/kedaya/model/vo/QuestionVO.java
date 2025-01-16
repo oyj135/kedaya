@@ -16,7 +16,6 @@ import java.util.List;
  */
 @Data
 public class QuestionVO implements Serializable {
-
     /**
      * id
      */
@@ -25,7 +24,7 @@ public class QuestionVO implements Serializable {
     /**
      * 题目内容（json格式）
      */
-    private  List<QuestionContentDTO> questionContent;
+    private List<QuestionContentDTO> questionContent;
 
     /**
      * 应用 id
@@ -82,9 +81,8 @@ public class QuestionVO implements Serializable {
         QuestionVO questionVO = new QuestionVO();
         BeanUtils.copyProperties(question, questionVO);
         String questionContent = question.getQuestionContent();
-        if (questionContent != null){
-            questionVO.setQuestionContent(JSONUtil.toList(question.getQuestionContent(), QuestionContentDTO.class));
-
+        if (questionContent != null) {
+            questionVO.setQuestionContent(JSONUtil.toList(questionContent, QuestionContentDTO.class));
         }
         return questionVO;
     }

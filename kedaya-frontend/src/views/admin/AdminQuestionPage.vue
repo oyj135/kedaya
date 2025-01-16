@@ -8,19 +8,19 @@
     <a-form-item field="appId" label="应用 id">
       <a-input
         v-model="formSearchParams.appId"
-        allow-clear
         placeholder="请输入应用 id"
+        allow-clear
       />
     </a-form-item>
     <a-form-item field="userId" label="用户 id">
       <a-input
         v-model="formSearchParams.userId"
-        allow-clear
         placeholder="请输入用户 id"
+        allow-clear
       />
     </a-form-item>
     <a-form-item>
-      <a-button html-type="submit" style="width: 100px" type="primary">
+      <a-button type="primary" html-type="submit" style="width: 100px">
         搜索
       </a-button>
     </a-form-item>
@@ -45,10 +45,10 @@
       </div>
     </template>
     <template #createTime="{ record }">
-      {{ dayjs(record.createTime).format("YYYY-MM-DD") }}
+      {{ dayjs(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
     </template>
     <template #updateTime="{ record }">
-      {{ dayjs(record.updateTime).format("YYYY-MM-DD") }}
+      {{ dayjs(record.updateTime).format("YYYY-MM-DD HH:mm:ss") }}
     </template>
     <template #optional="{ record }">
       <a-space>
@@ -58,7 +58,7 @@
   </a-table>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, watchEffect } from "vue";
 import {
   deleteQuestionUsingPost,

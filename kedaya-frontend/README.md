@@ -1,4 +1,4 @@
-# lendada-frontend
+# yudada-frontend
 
 ## Project setup
 ```

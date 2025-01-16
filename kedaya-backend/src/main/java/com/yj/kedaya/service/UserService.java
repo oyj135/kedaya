@@ -8,8 +8,10 @@ import com.yj.kedaya.model.vo.LoginUserVO;
 import com.yj.kedaya.model.vo.UserVO;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
 /**
  * 用户服务
+ *
  */
 public interface UserService extends IService<User> {
 

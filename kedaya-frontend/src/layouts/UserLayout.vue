@@ -4,32 +4,28 @@
       <a-layout-header class="header">
         <a-space>
           <img class="logo" src="../assets/logo.png" />
-          <div>智慧答 AI 答题应用平台</div>
+          <div>可达鸭 AI 答题应用平台</div>
         </a-space>
       </a-layout-header>
       <a-layout-content class="content">
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a
-          href="https://github.com/lenyanjgk"
-          style="text-decoration: none"
-          target="_blank"
-          >Lenyanjgk</a
-        >
-        &copy; zhihuida. All rights reserved.
+        <a href="https://www.ouyangjian.com" target="_blank">
+          小白鱼
+        </a>
       </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script setup lang="ts"></script>
 
 <style scoped>
 #userLayout {
   text-align: center;
-  background: url("../assets/bg.png");
-  background-size: cover;
+  background: url("https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png")
+    0% 0% / 100% 100%;
 }
 
 #userLayout .logo {

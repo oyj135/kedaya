@@ -6,13 +6,9 @@ import java.io.Serializable;
 
 /**
  * 审核请求
- *
- * @Author 阳健
- * @Package com.yj.kedaya.common
- * @Date 2024/9/26 13:16
  */
 @Data
-public class ReviewRequest implements Serializable{
+public class ReviewRequest implements Serializable {
 
     /**
      * id
@@ -20,7 +16,7 @@ public class ReviewRequest implements Serializable{
     private Long id;
 
     /**
-     * 状态：0-待审核，1-审核通过，2-审核不通过
+     * 状态：0-待审核, 1-通过, 2-拒绝
      */
     private Integer reviewStatus;
 
@@ -28,6 +24,7 @@ public class ReviewRequest implements Serializable{
      * 审核信息
      */
     private String reviewMessage;
+
 
     private static final long serialVersionUID = 1L;
 }

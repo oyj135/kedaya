@@ -2,26 +2,22 @@
   <div id="basicLayout">
     <a-layout style="height: 100vh">
       <a-layout-header class="header">
-        <GobalHeader />
+        <GlobalHeader />
       </a-layout-header>
       <a-layout-content class="content">
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a
-          href="https://github.com/oyj135"
-          style="text-decoration: none"
-          target="_blank"
-          >YangJian_github</a
-        >
-        &copy; kedaya. All rights reserved.
+        <a href="https://www.ouyangjian.com" target="_blank">
+          小白鱼
+        </a>
       </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
-<script lang="ts" setup>
-import GobalHeader from "@/components/GobalHeader.vue";
+<script setup lang="ts">
+import GlobalHeader from "@/components/GlobalHeader.vue";
 </script>
 
 <style scoped>
@@ -34,9 +30,9 @@ import GobalHeader from "@/components/GobalHeader.vue";
 }
 
 #basicLayout .content {
-  box-sizing: border-box;
-  width: 100%;
   max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto 28px;
   padding: 20px;
   background: linear-gradient(to right, #fefefe, #fff);

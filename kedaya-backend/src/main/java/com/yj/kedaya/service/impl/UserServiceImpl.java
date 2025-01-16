@@ -5,16 +5,16 @@ import static com.yj.kedaya.constant.UserConstant.USER_LOGIN_STATE;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yj.kedaya.mapper.UserMapper;
-import com.yj.kedaya.service.UserService;
 import com.yj.kedaya.common.ErrorCode;
 import com.yj.kedaya.constant.CommonConstant;
 import com.yj.kedaya.exception.BusinessException;
+import com.yj.kedaya.mapper.UserMapper;
 import com.yj.kedaya.model.dto.user.UserQueryRequest;
 import com.yj.kedaya.model.entity.User;
 import com.yj.kedaya.model.enums.UserRoleEnum;
 import com.yj.kedaya.model.vo.LoginUserVO;
 import com.yj.kedaya.model.vo.UserVO;
+import com.yj.kedaya.service.UserService;
 import com.yj.kedaya.utils.SqlUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     /**
      * 盐值，混淆密码
      */
-    public static final String SALT = "yj";
+    public static final String SALT = "yupi";
 
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {

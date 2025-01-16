@@ -11,17 +11,14 @@ import java.util.List;
 
 /**
  * 评分策略执行器
- *
- * @Author 阳健
- * @Package com.yj.kedaya.scoring
- * @Date 2024/12/27 22:19
  */
 @Service
 public class ScoringStrategyExecutor {
 
-    //策略列表
+    // 策略列表
     @Resource
     private List<ScoringStrategy> scoringStrategyList;
+
 
     /**
      * 评分

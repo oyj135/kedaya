@@ -61,7 +61,7 @@ public class QuestionController {
     @PostMapping("/add")
     public BaseResponse<Long> addQuestion(@RequestBody QuestionAddRequest questionAddRequest, HttpServletRequest request) {
         ThrowUtils.throwIf(questionAddRequest == null, ErrorCode.PARAMS_ERROR);
-        //  在此处将实体类和 DTO 进行转换
+        // 在此处将实体类和 DTO 进行转换
         Question question = new Question();
         BeanUtils.copyProperties(questionAddRequest, question);
         List<QuestionContentDTO> questionContentDTO = questionAddRequest.getQuestionContent();
@@ -118,7 +118,7 @@ public class QuestionController {
         if (questionUpdateRequest == null || questionUpdateRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        //  在此处将实体类和 DTO 进行转换
+        // 在此处将实体类和 DTO 进行转换
         Question question = new Question();
         BeanUtils.copyProperties(questionUpdateRequest, question);
         List<QuestionContentDTO> questionContentDTO = questionUpdateRequest.getQuestionContent();
@@ -226,7 +226,7 @@ public class QuestionController {
         if (questionEditRequest == null || questionEditRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        //  在此处将实体类和 DTO 进行转换
+        // 在此处将实体类和 DTO 进行转换
         Question question = new Question();
         BeanUtils.copyProperties(questionEditRequest, question);
         List<QuestionContentDTO> questionContentDTO = questionEditRequest.getQuestionContent();
@@ -271,7 +271,8 @@ public class QuestionController {
             "4. 返回的题目列表格式必须为 JSON 数组";
 
     /**
-     * 生产题目的用户消息
+     * 生成题目的用户消息
+     *
      * @param app
      * @param questionNumber
      * @param optionNumber
@@ -288,19 +289,21 @@ public class QuestionController {
     }
 
     @PostMapping("/ai_generate")
-    public BaseResponse<List<QuestionContentDTO>> aiGenerateQuestion(@RequestBody AiGenerateQuestionRequest aiGenerateQuestionRequest) {
+    public BaseResponse<List<QuestionContentDTO>> aiGenerateQuestion(
+            @RequestBody AiGenerateQuestionRequest aiGenerateQuestionRequest) {
         ThrowUtils.throwIf(aiGenerateQuestionRequest == null, ErrorCode.PARAMS_ERROR);
         // 获取参数
         Long appId = aiGenerateQuestionRequest.getAppId();
         int questionNumber = aiGenerateQuestionRequest.getQuestionNumber();
         int optionNumber = aiGenerateQuestionRequest.getOptionNumber();
+        // 获取应用信息
         App app = appService.getById(appId);
         ThrowUtils.throwIf(app == null, ErrorCode.NOT_FOUND_ERROR);
         // 封装 Prompt
         String userMessage = getGenerateQuestionUserMessage(app, questionNumber, optionNumber);
         // AI 生成
-        String result = aiManager.doSyncUnStableRequest(GENERATE_QUESTION_SYSTEM_MESSAGE, userMessage);
-        // 结果处理
+        String result = aiManager.doSyncRequest(GENERATE_QUESTION_SYSTEM_MESSAGE, userMessage, null);
+        // 截取需要的 JSON 信息
         int start = result.indexOf("[");
         int end = result.lastIndexOf("]");
         String json = result.substring(start, end + 1);
@@ -310,3 +313,20 @@ public class QuestionController {
 
     // endregion
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

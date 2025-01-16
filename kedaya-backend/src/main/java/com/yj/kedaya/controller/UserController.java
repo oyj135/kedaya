@@ -3,14 +3,12 @@ package com.yj.kedaya.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yj.kedaya.annotation.AuthCheck;
 import com.yj.kedaya.common.BaseResponse;
-import com.yj.kedaya.constant.UserConstant;
-import com.yj.kedaya.exception.BusinessException;
-import com.yj.kedaya.exception.ThrowUtils;
-import com.yj.kedaya.service.UserService;
-import com.yj.kedaya.service.impl.UserServiceImpl;
 import com.yj.kedaya.common.DeleteRequest;
 import com.yj.kedaya.common.ErrorCode;
 import com.yj.kedaya.common.ResultUtils;
+import com.yj.kedaya.constant.UserConstant;
+import com.yj.kedaya.exception.BusinessException;
+import com.yj.kedaya.exception.ThrowUtils;
 import com.yj.kedaya.model.dto.user.UserAddRequest;
 import com.yj.kedaya.model.dto.user.UserLoginRequest;
 import com.yj.kedaya.model.dto.user.UserQueryRequest;
@@ -20,11 +18,11 @@ import com.yj.kedaya.model.dto.user.UserUpdateRequest;
 import com.yj.kedaya.model.entity.User;
 import com.yj.kedaya.model.vo.LoginUserVO;
 import com.yj.kedaya.model.vo.UserVO;
+import com.yj.kedaya.service.UserService;
 
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -34,8 +32,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.yj.kedaya.service.impl.UserServiceImpl.SALT;
 
 /**
  * 用户接口
@@ -141,7 +140,7 @@ public class UserController {
         BeanUtils.copyProperties(userAddRequest, user);
         // 默认密码 12345678
         String defaultPassword = "12345678";
-        String encryptPassword = DigestUtils.md5DigestAsHex((UserServiceImpl.SALT + defaultPassword).getBytes());
+        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + defaultPassword).getBytes());
         user.setUserPassword(encryptPassword);
         boolean result = userService.save(user);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);

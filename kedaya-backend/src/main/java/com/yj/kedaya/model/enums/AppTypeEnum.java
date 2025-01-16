@@ -1,6 +1,6 @@
 package com.yj.kedaya.model.enums;
 
-import org.apache.commons.lang3.ObjectUtils;
+import cn.hutool.core.util.ObjectUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,11 +9,9 @@ import java.util.stream.Collectors;
 /**
  * App 应用类型枚举
  *
- * @Author 阳健
- * @Package com.yj.kedaya.model.enums
- * @Date 2024/9/23 12:40
  */
 public enum AppTypeEnum {
+
     SCORE("得分类", 0),
     TEST("测评类", 1);
 
@@ -27,22 +25,13 @@ public enum AppTypeEnum {
     }
 
     /**
-     * 获取值列表
-     *
-     * @return
-     */
-    public static List<Integer> getValues() {
-        return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
-    }
-
-    /**
      * 根据 value 获取枚举
      *
      * @param value
      * @return
      */
     public static AppTypeEnum getEnumByValue(Integer value) {
-        if (ObjectUtils.isEmpty(value)) {
+        if (ObjectUtil.isEmpty(value)) {
             return null;
         }
         for (AppTypeEnum anEnum : AppTypeEnum.values()) {
@@ -51,6 +40,15 @@ public enum AppTypeEnum {
             }
         }
         return null;
+    }
+
+    /**
+     * 获取值列表
+     *
+     * @return
+     */
+    public static List<Integer> getValues() {
+        return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
     }
 
     public int getValue() {

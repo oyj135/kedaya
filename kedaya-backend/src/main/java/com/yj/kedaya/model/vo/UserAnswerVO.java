@@ -1,8 +1,6 @@
 package com.yj.kedaya.model.vo;
 
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.yj.kedaya.model.entity.UserAnswer;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
@@ -17,9 +15,8 @@ import java.util.List;
  */
 @Data
 public class UserAnswerVO implements Serializable {
-
     /**
-     * id
+     *
      */
     private Long id;
 

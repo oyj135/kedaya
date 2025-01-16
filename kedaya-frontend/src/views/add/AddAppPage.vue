@@ -4,8 +4,8 @@
     <a-form
       :model="form"
       :style="{ width: '480px' }"
-      auto-label-width
       label-align="left"
+      auto-label-width
       @submit="handleSubmit"
     >
       <a-form-item field="appName" label="应用名称">
@@ -16,9 +16,8 @@
       </a-form-item>
       <a-form-item field="appIcon" label="应用图标">
         <PictureUploader
-          biz="app_icon"
           :value="form.appIcon"
-          :onChange="(url) => (form.appIcon = url)"
+          :onChange="(value) => (form.appIcon = value)"
         />
       </a-form-item>
       <a-form-item field="appType" label="应用类型">
@@ -29,9 +28,8 @@
         >
           <a-option
             v-for="(value, key) of APP_TYPE_MAP"
-            :key="key"
-            :label="value"
             :value="Number(key)"
+            :label="value"
           />
         </a-select>
       </a-form-item>
@@ -43,14 +41,13 @@
         >
           <a-option
             v-for="(value, key) of APP_SCORING_STRATEGY_MAP"
-            :key="key"
-            :label="value"
             :value="Number(key)"
+            :label="value"
           />
         </a-select>
       </a-form-item>
       <a-form-item>
-        <a-button html-type="submit" style="width: 120px" type="primary">
+        <a-button type="primary" html-type="submit" style="width: 120px">
           提交
         </a-button>
       </a-form-item>
@@ -58,8 +55,8 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { defineProps, reactive, ref, watchEffect, withDefaults } from "vue";
+<script setup lang="ts">
+import { defineProps, ref, watchEffect, withDefaults } from "vue";
 import API from "@/api";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
@@ -69,7 +66,7 @@ import {
   getAppVoByIdUsingGet,
 } from "@/api/appController";
 import { APP_SCORING_STRATEGY_MAP, APP_TYPE_MAP } from "@/constant/app";
-import PictureUploader from "@/components/PictureUploader.vue";
+
 interface Props {
   id: string;
 }
@@ -140,46 +137,3 @@ const handleSubmit = async () => {
   }
 };
 </script>
-
-<style scoped>
-#addAppPage {
-  width: 500px;
-  margin: auto;
-  margin-top: 100px;
-  padding: 30px;
-  text-align: center;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#addAppPage h2 {
-  margin-bottom: 30px;
-}
-
-a-form-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-a-form-item label {
-  margin-right: 10px;
-  color: #999;
-}
-
-a-input {
-  width: 100%;
-  max-width: 400px;
-}
-
-a-button {
-  width: 120px;
-  margin-right: 20px;
-}
-
-a-form-item:last-child {
-  justify-content: flex-end;
-}
-</style>

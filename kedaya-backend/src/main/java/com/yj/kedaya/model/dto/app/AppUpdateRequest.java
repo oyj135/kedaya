@@ -1,7 +1,5 @@
 package com.yj.kedaya.model.dto.app;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,7 +15,6 @@ public class AppUpdateRequest implements Serializable {
     /**
      * id
      */
-    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**

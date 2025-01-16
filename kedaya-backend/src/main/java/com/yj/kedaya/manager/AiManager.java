@@ -16,36 +16,32 @@ import java.util.List;
 
 /**
  * 通用 AI 调用能力
- * @Author 阳健
- * @Package com.yj.kedaya.manager
- * @Date 2025/1/16 17:31
  */
-
 @Component
 public class AiManager {
 
     @Resource
     private ClientV4 clientV4;
 
-    //稳定的随机数
+    // 稳定的随机数
     private static final float STABLE_TEMPERATURE = 0.05f;
 
-    //不稳定的随机数
+    // 不稳定的随机数
     private static final float UNSTABLE_TEMPERATURE = 0.99f;
 
     /**
-     * 同步请求(答案不稳定)
+     * 同步请求（答案不稳定）
      *
      * @param systemMessage
      * @param userMessage
      * @return
      */
-    public String doSyncUnStableRequest(String systemMessage, String userMessage) {
+    public String doSyncUnstableRequest(String systemMessage, String userMessage) {
         return doRequest(systemMessage, userMessage, Boolean.FALSE, UNSTABLE_TEMPERATURE);
     }
 
     /**
-     * 同步请求(答案较稳定)
+     * 同步请求（答案较稳定）
      *
      * @param systemMessage
      * @param userMessage
@@ -68,7 +64,7 @@ public class AiManager {
     }
 
     /**
-     * 通用请求(简化消息传递)
+     * 通用请求（简化消息传递）
      *
      * @param systemMessage
      * @param userMessage
@@ -78,9 +74,8 @@ public class AiManager {
      */
     public String doRequest(String systemMessage, String userMessage, Boolean stream, Float temperature) {
         List<ChatMessage> chatMessageList = new ArrayList<>();
-        ChatMessage systemChatMessage = new ChatMessage(ChatMessageRole.USER.value(), userMessage);
+        ChatMessage systemChatMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), systemMessage);
         chatMessageList.add(systemChatMessage);
-
         ChatMessage userChatMessage = new ChatMessage(ChatMessageRole.USER.value(), userMessage);
         chatMessageList.add(userChatMessage);
         return doRequest(chatMessageList, stream, temperature);

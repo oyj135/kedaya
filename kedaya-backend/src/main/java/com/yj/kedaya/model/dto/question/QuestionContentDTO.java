@@ -1,16 +1,10 @@
 package com.yj.kedaya.model.dto.question;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
-
-/**
- * @Author 阳健
- * @Package com.yj.kedaya.model.dto.question
- * @Date 2024/9/23 13:03
- */
 
 @Data
 @NoArgsConstructor
@@ -33,12 +27,12 @@ public class QuestionContentDTO {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class Option{
+    public static class Option {
         private String result;
         private int score;
         private String value;
         private String key;
     }
-
-
 }
+
+

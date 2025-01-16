@@ -53,19 +53,19 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     @Override
     public void validQuestion(Question question, boolean add) {
         ThrowUtils.throwIf(question == null, ErrorCode.PARAMS_ERROR);
-        //  从对象中取值
+        // 从对象中取值
         String questionContent = question.getQuestionContent();
         Long appId = question.getAppId();
         // 创建数据时，参数不能为空
         if (add) {
-            //  补充校验规则
-            ThrowUtils.throwIf(StringUtils.isBlank(questionContent), ErrorCode.PARAMS_ERROR, "题目不能为空");
-            ThrowUtils.throwIf(appId == null || appId <= 0, ErrorCode.PARAMS_ERROR, "appId非法");
+            // 补充校验规则
+            ThrowUtils.throwIf(StringUtils.isBlank(questionContent), ErrorCode.PARAMS_ERROR, "题目内容不能为空");
+            ThrowUtils.throwIf(appId == null || appId <= 0, ErrorCode.PARAMS_ERROR, "appId 非法");
         }
         // 修改数据时，有参数则校验
-        //  补充校验规则
+        // 补充校验规则
         if (appId != null) {
-           App app = appService.getById(appId);
+            App app = appService.getById(appId);
             ThrowUtils.throwIf(app == null, ErrorCode.PARAMS_ERROR, "应用不存在");
         }
     }
@@ -82,7 +82,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         if (questionQueryRequest == null) {
             return queryWrapper;
         }
-        //  从对象中取值
+        // 从对象中取值
         Long id = questionQueryRequest.getId();
         String questionContent = questionQueryRequest.getQuestionContent();
         Long appId = questionQueryRequest.getAppId();
@@ -91,7 +91,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         String sortField = questionQueryRequest.getSortField();
         String sortOrder = questionQueryRequest.getSortOrder();
 
-        //  补充需要的查询条件
+        // 补充需要的查询条件
         // 模糊查询
         queryWrapper.like(StringUtils.isNotBlank(questionContent), "questionContent", questionContent);
         // 精确查询
@@ -118,7 +118,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         // 对象转封装类
         QuestionVO questionVO = QuestionVO.objToVo(question);
 
-        // todo 可以根据需要为封装对象补充值，不需要的内容可以删除
+        // 可以根据需要为封装对象补充值，不需要的内容可以删除
         // region 可选
         // 1. 关联查询用户信息
         Long userId = question.getUserId();
@@ -152,7 +152,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
             return QuestionVO.objToVo(question);
         }).collect(Collectors.toList());
 
-        // todo 可以根据需要为封装对象补充值，不需要的内容可以删除
+        // 可以根据需要为封装对象补充值，不需要的内容可以删除
         // region 可选
         // 1. 关联查询用户信息
         Set<Long> userIdSet = questionList.stream().map(Question::getUserId).collect(Collectors.toSet());

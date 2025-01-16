@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { getLoginUserUsingGet } from "@/api/userController";
-import ACCESS_ENUM from "../access/accessEnum";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 /**
  * 登录用户信息全局状态
@@ -21,9 +21,6 @@ export const useLoginUserStore = defineStore("loginUser", () => {
       loginUser.value = res.data.data;
     } else {
       loginUser.value = { userRole: ACCESS_ENUM.NOT_LOGIN };
-      // setTimeout(() => {
-      //   loginUser.value = { userName: "江国凯" };
-      // }, 3000);
     }
   }
 
