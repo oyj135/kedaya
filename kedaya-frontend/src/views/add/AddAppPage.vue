@@ -17,12 +17,6 @@
       <a-form-item field="appIcon" label="应用图标">
         <a-input v-model="form.appIcon" placeholder="请输入应用图标" />
       </a-form-item>
-      <!--      <a-form-item field="appIcon" label="应用图标">-->
-      <!--        <PictureUploader-->
-      <!--          :value="form.appIcon"-->
-      <!--          :onChange="(value) => (form.appIcon = value)"-->
-      <!--        />-->
-      <!--      </a-form-item>-->
       <a-form-item field="appType" label="应用类型">
         <a-select
           v-model="form.appType"
@@ -61,7 +55,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, ref, watchEffect, withDefaults } from "vue";
+import { defineProps, reactive, ref, watchEffect, withDefaults } from "vue";
 import API from "@/api";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
@@ -71,7 +65,6 @@ import {
   getAppVoByIdUsingGet,
 } from "@/api/appController";
 import { APP_SCORING_STRATEGY_MAP, APP_TYPE_MAP } from "@/constant/app";
-
 interface Props {
   id: string;
 }

@@ -31,6 +31,15 @@ export const routes: Array<RouteRecordRaw> = [
     component: AddAppPage,
   },
   {
+    path: "/app/detail/:id",
+    name: "应用详情页",
+    props: true,
+    component: AppDetailPage,
+    meta: {
+      hideInMenu: true,
+    },
+  },
+  {
     path: "/add/app/:id",
     name: "修改应用",
     props: true,
@@ -53,15 +62,6 @@ export const routes: Array<RouteRecordRaw> = [
     name: "创建评分",
     component: AddScoringResultPage,
     props: true,
-    meta: {
-      hideInMenu: true,
-    },
-  },
-  {
-    path: "/app/detail/:id",
-    name: "应用详情页",
-    props: true,
-    component: AppDetailPage,
     meta: {
       hideInMenu: true,
     },

@@ -9,12 +9,12 @@
       </a-layout-content>
       <a-layout-footer class="footer">
         <a
-          href="https://github.com/lenyanjgk"
+          href="https://github.com/oyj135"
           style="text-decoration: none"
           target="_blank"
-          >Lenyanjgk</a
+          >YangJian_github</a
         >
-        &copy; zhihuida. All rights reserved.
+        &copy; kedaya. All rights reserved.
       </a-layout-footer>
     </a-layout>
   </div>

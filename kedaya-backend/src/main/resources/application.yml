@@ -69,3 +69,6 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.yj.kedaya.controller
+# AI 配置
+ai:
+  apiKey: xxx
