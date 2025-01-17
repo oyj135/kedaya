@@ -8,26 +8,26 @@
     <a-form-item field="resultName" label="结果名称">
       <a-input
         v-model="formSearchParams.resultName"
-        placeholder="请输入结果名称"
         allow-clear
+        placeholder="请输入结果名称"
       />
     </a-form-item>
     <a-form-item field="resultDesc" label="结果描述">
       <a-input
         v-model="formSearchParams.resultDesc"
-        placeholder="请输入结果描述"
         allow-clear
+        placeholder="请输入结果描述"
       />
     </a-form-item>
     <a-form-item field="appId" label="应用 id">
       <a-input
         v-model="formSearchParams.appId"
-        placeholder="请输入应用 id"
         allow-clear
+        placeholder="请输入应用 id"
       />
     </a-form-item>
     <a-form-item>
-      <a-button type="primary" html-type="submit" style="width: 100px">
+      <a-button html-type="submit" style="width: 100px" type="primary">
         搜索
       </a-button>
     </a-form-item>
@@ -41,10 +41,12 @@
       current: searchParams.current,
       total,
     }"
+    :scroll="scrollPercent"
+    :scrollbar="scrollbar"
     @page-change="onPageChange"
   >
     <template #resultPicture="{ record }">
-      <a-image width="64" :src="record.resultPicture" />
+      <a-image :src="record.resultPicture" width="64" />
     </template>
     <template #appType="{ record }">
       {{ APP_TYPE_MAP[record.appType] }}
@@ -66,7 +68,7 @@
   </a-table>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, watchEffect } from "vue";
 import {
   deleteUserAnswerUsingPost,
@@ -172,6 +174,7 @@ const columns = [
   {
     title: "描述",
     dataIndex: "resultDesc",
+    width: 300,
   },
   {
     title: "图片",
@@ -204,6 +207,12 @@ const columns = [
   {
     title: "操作",
     slotName: "optional",
+    fixed: "right",
   },
 ];
+const scrollbar = ref(true);
+const scrollPercent = {
+  x: "140%",
+  y: "30%",
+};
 </script>

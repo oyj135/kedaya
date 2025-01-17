@@ -4,8 +4,8 @@
     <a-form
       :model="form"
       :style="{ width: '480px' }"
-      label-align="left"
       auto-label-width
+      label-align="left"
       @submit="handleSubmit"
     >
       <a-form-item label="应用 id">
@@ -30,8 +30,8 @@
         <a-input-tag
           v-model="form.resultProp"
           :style="{ width: '320px' }"
-          placeholder="请输出结果集，按回车确认"
           allow-clear
+          placeholder="请输出结果集，按回车确认"
         />
       </a-form-item>
       <a-form-item field="resultScoreRange" label="结果得分范围">
@@ -41,17 +41,17 @@
         />
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" style="width: 120px">
+        <a-button html-type="submit" style="width: 120px" type="primary">
           提交
         </a-button>
       </a-form-item>
     </a-form>
     <h2 style="margin-bottom: 32px">评分管理</h2>
-    <ScoringResultTable :appId="appId" :doUpdate="doUpdate" ref="tableRef" />
+    <ScoringResultTable ref="tableRef" :appId="appId" :doUpdate="doUpdate" />
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { defineProps, ref, withDefaults } from "vue";
 import API from "@/api";
 import { useRouter } from "vue-router";

@@ -1,18 +1,18 @@
 <template>
   <a-button type="outline" @click="handleClick">AI 生成题目</a-button>
   <a-drawer
-    :width="340"
     :visible="visible"
-    @ok="handleOk"
-    @cancel="handleCancel"
+    :width="340"
     unmountOnClose
+    @cancel="handleCancel"
+    @ok="handleOk"
   >
     <template #title>AI 生成题目</template>
     <div>
       <a-form
         :model="form"
-        label-align="left"
         auto-label-width
+        label-align="left"
         @submit="handleSubmit"
       >
         <a-form-item label="应用 id">
@@ -20,17 +20,17 @@
         </a-form-item>
         <a-form-item field="questionNumber" label="题目数量">
           <a-input-number
-            min="0"
-            max="20"
             v-model="form.questionNumber"
+            max="20"
+            min="0"
             placeholder="请输入题目数量"
           />
         </a-form-item>
         <a-form-item field="optionNumber" label="选项数量">
           <a-input-number
-            min="0"
-            max="6"
             v-model="form.optionNumber"
+            max="6"
+            min="0"
             placeholder="请输入选项数量"
           />
         </a-form-item>
@@ -38,9 +38,9 @@
           <a-space>
             <a-button
               :loading="submitting"
-              type="primary"
               html-type="submit"
               style="width: 120px"
+              type="primary"
             >
               {{ submitting ? "生成中" : "一键生成" }}
             </a-button>
@@ -58,7 +58,7 @@
   </a-drawer>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { defineProps, reactive, ref, withDefaults } from "vue";
 import API from "@/api";
 import { aiGenerateQuestionUsingPost } from "@/api/questionController";

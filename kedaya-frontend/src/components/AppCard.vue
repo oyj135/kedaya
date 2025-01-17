@@ -1,63 +1,65 @@
 <template>
-  <a-card class="appCard" hoverable @click="doCardClick">
-    <template #actions>
-      <!--      <span class="icon-hover"> <IconThumbUp /> </span>-->
-      <span class="icon-hover"> <IconShareInternal /> </span>
-    </template>
+  <a-card
+    :body-style="{ padding: '16px' }"
+    class="appCard"
+    hoverable
+    @click="doCardClick"
+  >
     <template #cover>
-      <div
-        :style="{
-          height: '204px',
-          overflow: 'hidden',
-        }"
-      >
-        <img
-          :style="{ width: '100%',height: '200px', transform: 'translateY(-20px)' }"
-          :alt="app.appName"
-          :src="app.appIcon"
-        />
+      <div :style="{ height: '184px', overflow: 'hidden' }" class="card-cover">
+        <img :alt="app.appName" :src="app.appIcon" class="card-image" />
       </div>
     </template>
-    <a-card-meta :title="app.appName" :description="app.appDesc">
+    <template #actions>
+      <span class="icon-hover" @click="doShare">
+        <IconShareInternal />
+      </span>
+    </template>
+    <a-card-meta :description="app.appDesc" :title="app.appName">
       <template #avatar>
-        <div
-          :style="{ display: 'flex', alignItems: 'center', color: '#1D2129' }"
-        >
-          <a-avatar
-            :size="24"
-            :image-url="app.user?.userAvatar"
-            :style="{ marginRight: '8px' }"
-          />
-          <a-typography-text
-            >{{ app.user?.userName ?? "无名" }}
+        <div class="avatar-container">
+          <a-avatar :image-url="app.user?.userAvatar" size="small" />
+          <a-typography-text class="username">
+            {{ app.user?.userName ?? "无名" }}
           </a-typography-text>
         </div>
       </template>
     </a-card-meta>
   </a-card>
+  <ShareModal ref="shareModalRef" :link="shareLink" title="应用分享" />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { IconShareInternal } from "@arco-design/web-vue/es/icon";
 import API from "@/api";
-import { defineProps, withDefaults } from "vue";
+import { defineProps, ref, withDefaults } from "vue";
 import { useRouter } from "vue-router";
+import ShareModal from "@/components/ShareModal.vue";
 
 interface Props {
   app: API.AppVO;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  app: () => {
-    return {};
-  },
+  app: () => ({}),
 });
 
 const router = useRouter();
 const doCardClick = () => {
   router.push(`/app/detail/${props.app.id}`);
 };
+
+const shareModalRef = ref();
+const shareLink = `${window.location.protocol}//${window.location.host}/app/detail/${props.app.id}`;
+
+const doShare = (e: Event) => {
+  if (shareModalRef.value) {
+    shareModalRef.value.openModal();
+  }
+  e.stopPropagation();
+};
 </script>
+
 <style scoped>
 .appCard {
   border-radius: 8px;

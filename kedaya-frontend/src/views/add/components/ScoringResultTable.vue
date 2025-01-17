@@ -8,19 +8,19 @@
     <a-form-item field="resultName" label="结果名称">
       <a-input
         v-model="formSearchParams.resultName"
-        placeholder="请输入结果名称"
         allow-clear
+        placeholder="请输入结果名称"
       />
     </a-form-item>
     <a-form-item field="resultDesc" label="结果描述">
       <a-input
         v-model="formSearchParams.resultDesc"
-        placeholder="请输入结果描述"
         allow-clear
+        placeholder="请输入结果描述"
       />
     </a-form-item>
     <a-form-item>
-      <a-button type="primary" html-type="submit" style="width: 100px">
+      <a-button html-type="submit" style="width: 100px" type="primary">
         搜索
       </a-button>
     </a-form-item>
@@ -37,7 +37,7 @@
     @page-change="onPageChange"
   >
     <template #resultPicture="{ record }">
-      <a-image width="64" :src="record.resultPicture" />
+      <a-image :src="record.resultPicture" width="64" />
     </template>
     <template #createTime="{ record }">
       {{ dayjs(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
@@ -54,7 +54,7 @@
   </a-table>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { defineExpose, defineProps, ref, watchEffect, withDefaults } from "vue";
 import {
   deleteScoringResultUsingPost,
@@ -110,13 +110,9 @@ const loadData = async () => {
     message.error("获取数据失败，" + res.data.message);
   }
 };
-
-// 暴露函数给父组件
 defineExpose({
   loadData,
 });
-
-
 /**
  * 执行搜索
  */
@@ -126,7 +122,6 @@ const doSearch = () => {
     ...formSearchParams.value,
   };
 };
-
 /**
  * 当分页变化时，改变搜索条件，触发数据加载
  * @param page
@@ -137,7 +132,6 @@ const onPageChange = (page: number) => {
     current: page,
   };
 };
-
 /**
  * 删除
  * @param record
@@ -146,7 +140,6 @@ const doDelete = async (record: API.ScoringResult) => {
   if (!record.id) {
     return;
   }
-
   const res = await deleteScoringResultUsingPost({
     id: record.id,
   });
