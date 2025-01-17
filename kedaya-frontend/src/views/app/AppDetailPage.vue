@@ -39,7 +39,7 @@
             <a-button v-if="isMy" :href="`/add/app/${id}`">修改应用</a-button>
           </a-space>
         </a-col>
-        <a-col flex="320px">
+        <a-col flex="560px">
           <a-image width="100%" :src="data.appIcon" />
         </a-col>
       </a-row>

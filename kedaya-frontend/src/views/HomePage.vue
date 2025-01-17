@@ -1,24 +1,35 @@
 <template>
   <div id="homePage">
-    <div class="searchBar">
+    <a-form
+      :model="formSearchParams"
+      :style="{ marginBottom: '20px' }"
+      style="align-items: center"
+      @submit="doSearch"
+    >
       <a-input-search
+        v-model="formSearchParams.appName"
         :style="{ width: '320px' }"
-        placeholder="快速发现答题应用"
         button-text="搜索"
-        size="large"
+        placeholder="快速发现答题应用"
         search-button
-      />
-    </div>
+        size="large"
+        @click="doSearch"
+      >
+        <template #button-icon>
+          <icon-search />
+        </template>
+      </a-input-search>
+    </a-form>
     <a-list
-      class="list-demo-action-layout"
-      :grid-props="{ gutter: [20, 20], sm: 24, md: 12, lg: 8, xl: 6 }"
       :bordered="false"
       :data="dataList"
+      :grid-props="{ gutter: [20, 20], sm: 24, md: 12, lg: 8, xl: 6 }"
       :pagination-props="{
         pageSize: searchParams.pageSize,
         current: searchParams.current,
         total,
       }"
+      class="list-demo-action-layout"
       @page-change="onPageChange"
     >
       <template #item="{ item }">
@@ -28,7 +39,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, watchEffect } from "vue";
 import AppCard from "@/components/AppCard.vue";
 import API from "@/api";
@@ -36,10 +47,21 @@ import { listAppVoByPageUsingPost } from "@/api/appController";
 import message from "@arco-design/web-vue/es/message";
 import { REVIEW_STATUS_ENUM } from "@/constant/app";
 
+const formSearchParams = ref<API.AppQueryRequest>({});
+
+const doSearch = () => {
+  searchParams.value = {
+    ...initSearchParams,
+    ...formSearchParams.value,
+  };
+};
+
 // 初始化搜索条件（不应该被修改）
 const initSearchParams = {
   current: 1,
-  pageSize: 12,
+  pageSize: 8,
+  sortOrder: "descend",
+  sortField: "createTime",
 };
 
 const searchParams = ref<API.AppQueryRequest>({
@@ -89,8 +111,8 @@ watchEffect(() => {
 }
 
 .searchBar {
-  text-align: center;
   margin-bottom: 28px;
+  text-align: center;
 }
 
 .list-demo-action-layout .image-area {
