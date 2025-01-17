@@ -65,7 +65,6 @@ public class AiTestScoringStrategy implements ScoringStrategy {
         int start = result.indexOf("{");
         int end = result.lastIndexOf("}");
         String json = result.substring(start, end + 1);
-
         // 3. 构造返回值，填充答案对象的属性
         UserAnswer userAnswer = JSONUtil.toBean(json, UserAnswer.class);
         userAnswer.setAppId(appId);

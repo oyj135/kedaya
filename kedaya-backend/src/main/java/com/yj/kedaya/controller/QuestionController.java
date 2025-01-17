@@ -307,6 +307,7 @@ public class QuestionController {
         int start = result.indexOf("[");
         int end = result.lastIndexOf("]");
         String json = result.substring(start, end + 1);
+        json = json.replace("\\n", "").replace("\\", "");
         List<QuestionContentDTO> questionContentDTOList = JSONUtil.toList(json, QuestionContentDTO.class);
         return ResultUtils.success(questionContentDTOList);
     }
