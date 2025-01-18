@@ -14,6 +14,8 @@ public class AppAnswerCountDTO {
 
     private Long appId;
 
+    private String appName;
+
     /**
      * 用户提交答案数量
      */

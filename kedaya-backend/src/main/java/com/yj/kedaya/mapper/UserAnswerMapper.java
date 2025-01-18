@@ -14,7 +14,8 @@ import java.util.List;
  * @Entity com.yj.kedaya.model.entity.UserAnswer
  */
 public interface UserAnswerMapper extends BaseMapper<UserAnswer> {
-    @Select("select appId, count(userId) as answerCount from user_answer group by appId order by answerCount desc limit 10;")
+    @Select("select appId, app.appName, count(user_answer_0.userId) as answerCount from user_answer_0 join app on app.id = user_answer_0.appId\n" +
+            "  group by appId order by answerCount desc;")
     List<AppAnswerCountDTO> doAppAnswerCount();
 
     @Select("select resultName, count(resultName) as resultCount from user_answer " +

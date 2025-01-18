@@ -23,7 +23,7 @@ public class AiConfig {
     public ClientV4 getClientV4() {
         return new ClientV4.Builder(apiKey)
                 .enableTokenCache()
-                .networkConfig(30, 10, 10, 10, TimeUnit.SECONDS)
+                .networkConfig(30, 60, 60, 60, TimeUnit.SECONDS)
                 .connectionPool(new okhttp3.ConnectionPool(8, 1, TimeUnit.SECONDS))
                 .build();
     }
