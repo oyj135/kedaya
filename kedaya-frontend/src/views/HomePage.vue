@@ -1,5 +1,6 @@
 <template>
   <div id="homePage">
+    <ShareModal />
     <a-form
       :model="formSearchParams"
       :style="{ marginBottom: '20px' }"
@@ -46,6 +47,7 @@ import API from "@/api";
 import { listAppVoByPageUsingPost } from "@/api/appController";
 import message from "@arco-design/web-vue/es/message";
 import { REVIEW_STATUS_ENUM } from "@/constant/app";
+import ShareModal from "@/components/ShareModal.vue";
 
 const formSearchParams = ref<API.AppQueryRequest>({});
 

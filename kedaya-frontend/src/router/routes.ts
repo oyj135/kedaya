@@ -135,6 +135,14 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/app_statistic",
+    name: "应用统计",
+    component: AppStatisticPage,
+    meta: {
+      access: ACCESS_ENUM.ADMIN,
+    },
+  },
+  {
     path: "/noAuth",
     name: "无权限",
     component: NoAuthPage,
