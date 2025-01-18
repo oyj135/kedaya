@@ -1,4 +1,6 @@
 <template>
+  <!-- <div>{{ link }}</div>
+  <img :src="codeImg" alt="QR Code" /> -->
   <a-modal
     v-model:visible="visible"
     :footer="false"
@@ -23,6 +25,7 @@
 
 <script lang="ts" setup>
 import { defineExpose, defineProps, ref, withDefaults } from "vue";
+// @ts-ignore
 import QRCode from "qrcode";
 import message from "@arco-design/web-vue/es/message";
 
@@ -40,7 +43,7 @@ interface Props {
  * 给组件指定初始值
  */
 const props = withDefaults(defineProps<Props>(), {
-  link: () => "https://laoyujianli.com/share/yupi",
+  link: () => "https://ouyangjian.com",
   title: () => "分享",
 });
 
@@ -67,10 +70,10 @@ const closeModal = () => {
 
 // 二维码生成
 QRCode.toDataURL(props.link)
-  .then((url) => {
+  .then((url: any) => {
     codeImg.value = url;
   })
-  .catch((err) => {
+  .catch((err :any) => {
     console.error(err);
     message.error("生成二维码失败，" + err.message);
   });

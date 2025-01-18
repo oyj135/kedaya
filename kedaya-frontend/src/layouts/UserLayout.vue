@@ -4,7 +4,7 @@
       <a-layout-header class="header">
         <a-space>
           <img class="logo" src="../assets/logo.png" />
-          <div>智慧答 AI 答题应用平台</div>
+          <div>可达鸭 AI 答题应用平台</div>
         </a-space>
       </a-layout-header>
       <a-layout-content class="content">
@@ -12,12 +12,12 @@
       </a-layout-content>
       <a-layout-footer class="footer">
         <a
-          href="https://github.com/lenyanjgk"
+          href="https://github.com/oyj135"
           style="text-decoration: none"
           target="_blank"
-          >Lenyanjgk</a
+          >小白鱼</a
         >
-        &copy; zhihuida. All rights reserved.
+        &copy; 可达鸭. All rights reserved.
       </a-layout-footer>
     </a-layout>
   </div>

@@ -49,13 +49,18 @@ const doCardClick = () => {
   router.push(`/app/detail/${props.app.id}`);
 };
 
+// 分享弹窗的引用
 const shareModalRef = ref();
+
+// 分享链接
 const shareLink = `${window.location.protocol}//${window.location.host}/app/detail/${props.app.id}`;
 
+// 点击分享按钮弹出分享弹窗
 const doShare = (e: Event) => {
   if (shareModalRef.value) {
     shareModalRef.value.openModal();
   }
+  // 阻止事件冒泡，防止触发路由跳转
   e.stopPropagation();
 };
 </script>
