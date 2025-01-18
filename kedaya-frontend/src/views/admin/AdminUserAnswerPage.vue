@@ -2,42 +2,53 @@
   <a-form
     :model="formSearchParams"
     :style="{ marginBottom: '20px' }"
-    layout="inline"
     @submit="doSearch"
   >
-    <a-form-item field="resultName" label="结果名称">
-      <a-input
-        v-model="formSearchParams.resultName"
-        placeholder="请输入结果名称"
-        allow-clear
-      />
-    </a-form-item>
-    <a-form-item field="resultDesc" label="结果描述">
-      <a-input
-        v-model="formSearchParams.resultDesc"
-        placeholder="请输入结果描述"
-        allow-clear
-      />
-    </a-form-item>
-    <a-form-item field="appId" label="应用 id">
-      <a-input
-        v-model="formSearchParams.appId"
-        placeholder="请输入应用 id"
-        allow-clear
-      />
-    </a-form-item>
-    <a-form-item field="userId" label="用户 id">
-      <a-input
-        v-model="formSearchParams.userId"
-        placeholder="请输入用户 id"
-        allow-clear
-      />
-    </a-form-item>
-    <a-form-item>
-      <a-button type="primary" html-type="submit" style="width: 100px">
-        搜索
-      </a-button>
-    </a-form-item>
+    <a-row :gutter="16">
+      <a-col :span="8">
+        <a-form-item field="resultName" label="结果名称">
+          <a-input
+            v-model="formSearchParams.resultName"
+            allow-clear
+            placeholder="请输入结果名称"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-form-item field="resultDesc" label="结果描述">
+          <a-input
+            v-model="formSearchParams.resultDesc"
+            allow-clear
+            placeholder="请输入结果描述"
+          />
+        </a-form-item>
+      </a-col>
+    </a-row>
+    <a-row :gutter="16">
+      <a-col :span="8">
+        <a-form-item field="appId" label="应用 id">
+          <a-input
+            v-model="formSearchParams.appId"
+            allow-clear
+            placeholder="请输入应用 id"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-form-item field="userId" label="用户 id">
+          <a-input
+            v-model="formSearchParams.userId"
+            allow-clear
+            placeholder="请输入用户 id"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-button html-type="submit" style="width: 100px" type="primary">
+          搜 索
+        </a-button>
+      </a-col>
+    </a-row>
   </a-form>
   <a-table
     :columns="columns"
@@ -48,10 +59,12 @@
       current: searchParams.current,
       total,
     }"
+    :scroll="scrollPercent"
+    :scrollbar="scrollbar"
     @page-change="onPageChange"
   >
     <template #resultPicture="{ record }">
-      <a-image width="64" :src="record.resultPicture" />
+      <a-image :src="record.resultPicture" width="64" />
     </template>
     <template #appType="{ record }">
       {{ APP_TYPE_MAP[record.appType] }}
@@ -60,10 +73,10 @@
       {{ APP_SCORING_STRATEGY_MAP[record.scoringStrategy] }}
     </template>
     <template #createTime="{ record }">
-      {{ dayjs(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
+      {{ dayjs(record.createTime).format("YYYY-MM-DD") }}
     </template>
     <template #updateTime="{ record }">
-      {{ dayjs(record.updateTime).format("YYYY-MM-DD HH:mm:ss") }}
+      {{ dayjs(record.updateTime).format("YYYY-MM-DD") }}
     </template>
     <template #optional="{ record }">
       <a-space>
@@ -73,7 +86,7 @@
   </a-table>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, watchEffect } from "vue";
 import {
   deleteUserAnswerUsingPost,
@@ -167,6 +180,7 @@ const columns = [
   {
     title: "选项",
     dataIndex: "choices",
+    width: 300,
   },
   {
     title: "结果 id",
@@ -179,6 +193,8 @@ const columns = [
   {
     title: "描述",
     dataIndex: "resultDesc",
+    slotName: "resultDesc",
+    width: 300,
   },
   {
     title: "图片",
@@ -220,6 +236,13 @@ const columns = [
   {
     title: "操作",
     slotName: "optional",
+    fixed: "right",
   },
 ];
+
+const scrollbar = ref(true);
+const scrollPercent = {
+  x: "180%",
+  y: "100%",
+};
 </script>

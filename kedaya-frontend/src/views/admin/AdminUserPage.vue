@@ -2,28 +2,59 @@
   <a-form
     :model="formSearchParams"
     :style="{ marginBottom: '20px' }"
-    layout="inline"
     @submit="doSearch"
   >
-    <a-form-item field="userName" label="用户名">
-      <a-input
-        allow-clear
-        v-model="formSearchParams.userName"
-        placeholder="请输入用户名"
-      />
-    </a-form-item>
-    <a-form-item field="userProfile" label="用户简介">
-      <a-input
-        allow-clear
-        v-model="formSearchParams.userProfile"
-        placeholder="请输入用户简介"
-      />
-    </a-form-item>
-    <a-form-item>
-      <a-button type="primary" html-type="submit" style="width: 100px">
-        搜索
-      </a-button>
-    </a-form-item>
+    <a-row :gutter="16">
+      <a-col :span="8">
+        <a-form-item field="id" label="用户ID">
+          <a-input
+            v-model="formSearchParams.id"
+            :max-length="20"
+            allow-clear
+            placeholder="请输入用户id"
+            show-word-limit
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-form-item field="userName" label="用户名">
+          <a-input
+            v-model="formSearchParams.userName"
+            :max-length="10"
+            allow-clear
+            placeholder="请输入用户名"
+            show-word-limit
+          />
+        </a-form-item>
+      </a-col>
+    </a-row>
+    <a-row :gutter="24">
+      <a-col :span="8">
+        <a-form-item field="userProfile" label="用户简介">
+          <a-input
+            v-model="formSearchParams.userProfile"
+            allow-clear
+            placeholder="请输入用户简介"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-form-item field="userRole" label="用户角色">
+          <a-input
+            v-model="formSearchParams.userRole"
+            :max-length="10"
+            allow-clear
+            placeholder="请输入用户角色"
+            show-word-limit
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-button html-type="submit" style="width: 100px" type="primary">
+          搜 索
+        </a-button>
+      </a-col>
+    </a-row>
   </a-form>
   <a-table
     :columns="columns"
@@ -37,13 +68,13 @@
     @page-change="onPageChange"
   >
     <template #userAvatar="{ record }">
-      <a-image width="64" :src="record.userAvatar" />
+      <a-image :src="record.userAvatar" width="64" />
     </template>
     <template #createTime="{ record }">
-      {{ dayjs(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
+      {{ dayjs(record.createTime).format("YYYY-MM-DD") }}
     </template>
     <template #updateTime="{ record }">
-      {{ dayjs(record.updateTime).format("YYYY-MM-DD HH:mm:ss") }}
+      {{ dayjs(record.updateTime).format("YYYY-MM-DD") }}
     </template>
     <template #optional="{ record }">
       <a-space>
@@ -53,7 +84,7 @@
   </a-table>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, watchEffect } from "vue";
 import {
   deleteUserUsingPost,

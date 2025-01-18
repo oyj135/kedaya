@@ -1,24 +1,32 @@
 <template>
   <div id="answerResultPage">
-    <a-card>
+    <a-card
+      style="border-radius: 12px; box-shadow: 0 4px 22px rgba(0, 0, 0, 0.1)"
+    >
       <a-row style="margin-bottom: 16px">
-        <a-col flex="auto" class="content-wrapper">
-          <h2>{{ data.resultName }}</h2>
-          <p>结果描述：{{ data.resultDesc }}</p>
-          <p>结果 id：{{ data.resultId }}</p>
-          <p>结果得分：{{ data.resultScore }}</p>
-          <p>我的答案：{{ data.choices }}</p>
-          <p>应用 id：{{ data.appId }}</p>
-          <p>应用类型：{{ APP_TYPE_MAP[data.appType] }}</p>
-          <p>评分策略：{{ APP_SCORING_STRATEGY_MAP[data.scoringStrategy] }}</p>
-          <p>
+        <a-col class="content-wrapper" flex="auto">
+          <h2 class="result-title">{{ data.resultName }}</h2>
+          <p class="description" style="margin-bottom: 22px">
+            {{ data.resultDesc }}
+          </p>
+          <p style="margin-bottom: 22px">结果 id：{{ data.resultId }}</p>
+          <p style="margin-bottom: 22px">结果得分：{{ data.resultScore }}</p>
+          <p style="margin-bottom: 22px">我的答案：{{ data.choices }}</p>
+          <p style="margin-bottom: 22px">应用 id：{{ data.appId }}</p>
+          <p style="margin-bottom: 22px">
+            应用类型：{{ APP_TYPE_MAP[data.appType] }}
+          </p>
+          <p style="margin-bottom: 22px">
+            评分策略：{{ APP_SCORING_STRATEGY_MAP[data.scoringStrategy] }}
+          </p>
+          <p style="margin-bottom: 22px">
             <a-space>
               答题人：
               <div :style="{ display: 'flex', alignItems: 'center' }">
                 <a-avatar
-                  :size="24"
                   :image-url="data.user?.userAvatar"
-                  :style="{ marginRight: '8px' }"
+                  :size="24"
+                  :style="{ marginRight: '22px' }"
                 />
                 <a-typography-text
                   >{{ data.user?.userName ?? "无名" }}
@@ -26,24 +34,24 @@
               </div>
             </a-space>
           </p>
-          <p>
+          <p style="margin-bottom: 22px">
             答题时间：{{ dayjs(data.createTime).format("YYYY-MM-DD HH:mm:ss") }}
           </p>
           <a-space size="medium">
-            <a-button type="primary" :href="`/answer/do/${data.appId}`"
+            <a-button :href="`/answer/do/${data.appId}`" type="primary"
               >去答题
             </a-button>
           </a-space>
         </a-col>
         <a-col flex="320px">
-          <a-image width="100%" :src="data.userAnswerIcon" />
+          <a-image :src="data.resultPicture" width="100%" />
         </a-col>
       </a-row>
     </a-card>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { defineProps, ref, watchEffect, withDefaults } from "vue";
 import API from "@/api";
 import { getUserAnswerVoByIdUsingGet } from "@/api/userAnswerController";
@@ -93,9 +101,30 @@ watchEffect(() => {
 
 <style scoped>
 #answerResultPage {
+  background-color: #f9f9f9;
 }
 
-#answerResultPage .content-wrapper > * {
+.result-title {
+  color: #333;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.description {
+  color: #666;
+  font-size: 16px;
+}
+
+#answerResultPage.content-wrapper > * {
   margin-bottom: 24px;
+}
+
+a-button[type="primary"] {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+a-avatar {
+  border-radius: 50%;
 }
 </style>
