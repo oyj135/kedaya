@@ -1,6 +1,6 @@
-/* eslint-disable */
 // @ts-ignore
-import request from '@/request';
+/* eslint-disable */
+import request from "@/request";
 
 /** uploadFile POST /api/file/upload */
 export async function uploadFileUsingPost(

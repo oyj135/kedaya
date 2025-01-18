@@ -5,14 +5,6 @@ declare namespace API {
     questionNumber?: number;
   };
 
-  type aiGenerateQuestionSSETestUsingGETParams = {
-    appId?: number;
-    optionNumber?: number;
-    questionNumber?: number;
-    /** isVip */
-    isVip?: boolean;
-  };
-
   type aiGenerateQuestionSSEUsingGETParams = {
     appId?: number;
     optionNumber?: number;
@@ -20,31 +12,19 @@ declare namespace API {
   };
 
   type App = {
-    /** 应用描述 */
     appDesc?: string;
-    /** 应用图标URL */
     appIcon?: string;
-    /** 应用名 */
-    appName: string;
-    /** 应用类型（0-得分类，1-测评类） */
-    appType?: 0 | 1;
-    /** 创建时间 */
+    appName?: string;
+    appType?: number;
     createTime?: string;
-    /** ID */
     id?: number;
-    /** 审核信息 */
+    isDelete?: number;
     reviewMessage?: string;
-    /** 审核状态：0-待审核, 1-通过, 2-拒绝 */
-    reviewStatus?: 0 | 1 | 2;
-    /** 审核时间 */
+    reviewStatus?: number;
     reviewTime?: string;
-    /** 审核人ID */
     reviewerId?: number;
-    /** 评分策略（0-自定义，1-AI） */
-    scoringStrategy?: 0 | 1;
-    /** 更新时间 */
+    scoringStrategy?: number;
     updateTime?: string;
-    /** 创建用户ID */
     userId?: number;
   };
 
@@ -54,16 +34,6 @@ declare namespace API {
     appName?: string;
     appType?: number;
     scoringStrategy?: number;
-  };
-
-  type AppAnswerCountDTO = {
-    answerCount?: number;
-    appId?: string;
-  };
-
-  type AppAnswerResultCountDTO = {
-    resultCount?: string;
-    resultName?: string;
   };
 
   type AppEditRequest = {
@@ -136,30 +106,6 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseInt_ = {
-    code?: number;
-    data?: number;
-    message?: string;
-  };
-
-  type BaseResponseListApp_ = {
-    code?: number;
-    data?: App[];
-    message?: string;
-  };
-
-  type BaseResponseListAppAnswerCountDTO_ = {
-    code?: number;
-    data?: AppAnswerCountDTO[];
-    message?: string;
-  };
-
-  type BaseResponseListAppAnswerResultCountDTO_ = {
-    code?: number;
-    data?: AppAnswerResultCountDTO[];
-    message?: string;
-  };
-
   type BaseResponseListQuestionContentDTO_ = {
     code?: number;
     data?: QuestionContentDTO[];
@@ -187,18 +133,6 @@ declare namespace API {
   type BaseResponsePageAppVO_ = {
     code?: number;
     data?: PageAppVO_;
-    message?: string;
-  };
-
-  type BaseResponsePagePost_ = {
-    code?: number;
-    data?: PagePost_;
-    message?: string;
-  };
-
-  type BaseResponsePagePostVO_ = {
-    code?: number;
-    data?: PagePostVO_;
     message?: string;
   };
 
@@ -250,12 +184,6 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponsePostVO_ = {
-    code?: number;
-    data?: PostVO;
-    message?: string;
-  };
-
   type BaseResponseQuestionVO_ = {
     code?: number;
     data?: QuestionVO;
@@ -296,17 +224,7 @@ declare namespace API {
     id?: number;
   };
 
-  type getAppAnswerResultCountUsingGETParams = {
-    /** appId */
-    appId?: number;
-  };
-
   type getAppVOByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getPostVOByIdUsingGETParams = {
     /** id */
     id?: number;
   };
@@ -379,32 +297,6 @@ declare namespace API {
     orders?: OrderItem[];
     pages?: number;
     records?: AppVO[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PagePost_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: Post[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PagePostVO_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: PostVO[];
     searchCount?: boolean;
     size?: number;
     total?: number;
@@ -514,95 +406,13 @@ declare namespace API {
     total?: number;
   };
 
-  type Post = {
-    content?: string;
+  type Question = {
+    appId?: number;
     createTime?: string;
-    favourNum?: number;
     id?: number;
     isDelete?: number;
-    tags?: string;
-    thumbNum?: number;
-    title?: string;
-    updateTime?: string;
-    userId?: number;
-  };
-
-  type PostAddRequest = {
-    content?: string;
-    tags?: string[];
-    title?: string;
-  };
-
-  type PostEditRequest = {
-    content?: string;
-    id?: number;
-    tags?: string[];
-    title?: string;
-  };
-
-  type PostFavourAddRequest = {
-    postId?: number;
-  };
-
-  type PostFavourQueryRequest = {
-    current?: number;
-    pageSize?: number;
-    postQueryRequest?: PostQueryRequest;
-    sortField?: string;
-    sortOrder?: string;
-    userId?: number;
-  };
-
-  type PostQueryRequest = {
-    content?: string;
-    current?: number;
-    favourUserId?: number;
-    id?: number;
-    notId?: number;
-    orTags?: string[];
-    pageSize?: number;
-    searchText?: string;
-    sortField?: string;
-    sortOrder?: string;
-    tags?: string[];
-    title?: string;
-    userId?: number;
-  };
-
-  type PostThumbAddRequest = {
-    postId?: number;
-  };
-
-  type PostUpdateRequest = {
-    content?: string;
-    id?: number;
-    tags?: string[];
-    title?: string;
-  };
-
-  type PostVO = {
-    content?: string;
-    createTime?: string;
-    favourNum?: number;
-    hasFavour?: boolean;
-    hasThumb?: boolean;
-    id?: number;
-    tagList?: string[];
-    thumbNum?: number;
-    title?: string;
-    updateTime?: string;
-    user?: UserVO;
-    userId?: number;
-  };
-
-  type Question = {
-    /** 应用ID */
-    appId?: number;
-    /** 题目ID */
-    id?: number;
-    /** 题目内容（JSON格式） */
     questionContent?: string;
-    /** 创建用户ID */
+    updateTime?: string;
     userId?: number;
   };
 
@@ -655,21 +465,16 @@ declare namespace API {
   };
 
   type ScoringResult = {
-    /** 应用ID */
     appId?: number;
-    /** 评分结果ID */
+    createTime?: string;
     id?: number;
-    /** 结果描述 */
+    isDelete?: number;
     resultDesc?: string;
-    /** 结果名称 */
     resultName?: string;
-    /** 结果图片URL */
     resultPicture?: string;
-    /** 结果属性集合（JSON格式） */
     resultProp?: string;
-    /** 结果得分范围 */
     resultScoreRange?: number;
-    /** 创建用户ID */
+    updateTime?: string;
     userId?: number;
   };
 
@@ -762,27 +567,19 @@ declare namespace API {
   };
 
   type UserAnswer = {
-    /** 应用ID */
     appId?: number;
-    /** 应用类型 */
     appType?: number;
-    /** 用户答案JSON数组 */
     choices?: string;
-    /** 记录ID */
+    createTime?: string;
     id?: number;
-    /** 结果描述 */
+    isDelete?: number;
     resultDesc?: string;
-    /** 评分结果ID */
     resultId?: number;
-    /** 结果名称 */
     resultName?: string;
-    /** 结果图标URL */
     resultPicture?: string;
-    /** 用户得分 */
     resultScore?: number;
-    /** 评分策略 */
     scoringStrategy?: number;
-    /** 用户ID */
+    updateTime?: string;
     userId?: number;
   };
 

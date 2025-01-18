@@ -1,5 +1,5 @@
-/* eslint-disable */
 // @ts-ignore
+/* eslint-disable */
 import request from '@/request';
 
 /** addApp POST /api/app/add */
@@ -108,18 +108,6 @@ export async function doAppReviewUsingPost(
 ) {
   return request<API.BaseResponseBoolean_>('/api/app/review', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: body,
-    ...(options || {}),
-  });
-}
-
-/** searchAppByName GET /api/app/search */
-export async function searchAppByNameUsingGet(body: string, options?: { [key: string]: any }) {
-  return request<API.BaseResponseListApp_>('/api/app/search', {
-    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },

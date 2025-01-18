@@ -1,5 +1,5 @@
-/* eslint-disable */
 // @ts-ignore
+/* eslint-disable */
 import request from '@/request';
 
 /** addScoringResult POST /api/scoringResult/add */

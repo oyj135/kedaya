@@ -142,3 +142,5 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+# 忽略可能包含敏感信息的配置文件
+mall-product/src/main/resources/application.yml
